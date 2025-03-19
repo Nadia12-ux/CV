@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nadia Habib - Interactive CV</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #f0f9ff;
+            --accent-color: #4f46e5;
+            --text-color: #1e293b;
+            --light-text: #64748b;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: #f8fafc;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            font-weight: bold;
+            color: var(--primary-color);
+            border: 5px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Contact Info */
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .contact-item i {
+            font-size: 18px;
+        }
+        
+        /* Main Content */
+        main {
+            padding: 40px 0;
+        }
+        
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+        
+        .section-title i {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+        
+        .section-title h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        /* Education Section */
+        .education-item {
+            margin-bottom: 20px;
+        }
+        
+        .education-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .education-item h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .education-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            color: var(--light-text);
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .skill-category {
+            margin-bottom: 20px;
+        }
+        
+        .skill-category h3 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .skill-item {
+            background-color: var(--secondary-color);
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        /* Experience Section */
+        .experience-item {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid var(--secondary-color);
+        }
+        
+        .experience-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            left: -7px;
+            top: 5px;
+        }
+        
+        .experience-item p {
+            margin-top: 10px;
+            color: var(--light-text);
+        }
+        
+        /* Languages Section */
+        .languages-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .language-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .language-name {
+            font-weight: 500;
+        }
+        
+        .language-level {
+            width: 60%;
+            height: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .language-level-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+        }
+        
+        /* Certifications Section */
+        .cert-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+        }
+        
+        .cert-item:hover {
+            background-color: rgba(99, 102, 241, 0.1);
+        }
+        
+        .cert-item h3 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .cert-item p {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--text-color);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sections-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .name {
+                font-size: 2rem;
+            }
+            
+            .skills-container {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+        
+        /* Interactive Elements */
+        .interactive-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        
+        .interactive-btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        
+        .hidden-content {
+            display: none;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-radius: var(--border-radius);
+            margin-top: 15px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Progress bars */
+        .progress-container {
+            margin-top: 20px;
+        }
+        
+        .progress-item {
+            margin-bottom: 15px;
+        }
+        
+        .progress-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 10px;
+            transition: width 1s ease-in-out;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body itemscope itemtype="https://schema.org/Person">
+    <header>
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-image">
+                    NH
+                </div>
+                <h1 class="name" itemprop="name">Nadia Habib</h1>
+                <p class="tagline" itemprop="description">"Creative and motivated in graphic designing seeking to contribute fresh ideas and develop skills within a dynamic design team."</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <span itemprop="telephone">+92 3219900833</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span itemprop="email">nadiahabib292@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                            <span itemprop="addressLocality">Sargodha</span>, 
+                            <span itemprop="addressCountry">Pakistan</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="sections-grid">
+            <div class="section" id="education">
+                <div class="section-title">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <h2>Education</h2>
+                </div>
+                <div itemprop="alumniOf" itemscope itemtype="https://schema.org/EducationalOrganization">
+                    <div class="education-item">
+                        <h3 itemprop="name">University of Sargodha</h3>
+                        <div class="education-details">
+                            <span itemprop="degree">Bachelor of Computer Science</span>
+                            <span itemprop="dateCreated">2021 - Ongoing</span>
+                        </div>
+                    </div>
+                </div>
+                <div itemprop="alumniOf" itemscope itemtype="https://schema.org/EducationalOrganization">
+                    <div class="education-item">
+                        <h3 itemprop="name">Air Base Inter College PAF Base Mushaf Sargodha</h3>
+                        <div class="education-details">
+                            <span itemprop="degree">FSC</span>
+                            <span itemprop="dateCreated">2019 - 2021</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="interactive-btn" onclick="toggleContent('education-more')">See More</button>
+                <div id="education-more" class="hidden-content">
+                    <p>During my time at the University of Sargodha, I have focused on developing both my technical skills in computer science and my passion for graphic design. I have maintained a strong academic record while actively participating in design-related extracurricular activities.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="skills">
+                <div class="section-title">
+                    <i class="fa-solid fa-code"></i>
+                    <h2>Skills</h2>
+                </div>
+                <div class="skill-category">
+                    <h3>Graphic Design Software</h3>
+                    <div class="skills-container">
+                        <div class="skill-item" itemprop="knowsAbout">Adobe Photoshop</div>
+                        <div class="skill-item" itemprop="knowsAbout">Adobe Illustrator</div>
+                        <div class="skill-item" itemprop="knowsAbout">Adobe InDesign</div>
+                        <div class="skill-item" itemprop="knowsAbout">Canva</div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Visual Design</h3>
+                    <div class="skills-container">
+                        <div class="skill-item" itemprop="knowsAbout">Color Theory</div>
+                        <div class="skill-item" itemprop="knowsAbout">Typography</div>
+                        <div class="skill-item" itemprop="knowsAbout">Layout Design</div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Branding</h3>
+                    <div class="skills-container">
+                        <div class="skill-item" itemprop="knowsAbout">Logo Design</div>
+                        <div class="skill-item" itemprop="knowsAbout">Brand Identity</div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Illustration</h3>
+                    <div class="skills-container">
+                        <div class="skill-item" itemprop="knowsAbout">Digital Illustration</div>
+                        <div class="skill-item" itemprop="knowsAbout">Vector Graphics</div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Office Software</h3>
+                    <div class="skills-container">
+                        <div class="skill-item" itemprop="knowsAbout">Microsoft Office</div>
+                        <div class="skill-item" itemprop="knowsAbout">Google Workspace</div>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-item">
+                        <div class="progress-title">
+                            <span>Adobe Creative Suite</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-title">
+                            <span>Visual Design</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-title">
+                            <span>Branding</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section" id="experience">
+                <div class="section-title">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <h2>Experience</h2>
+                </div>
+                <div itemscope itemtype="https://schema.org/WorkExperience">
+                    <div class="experience-item">
+                        <h3 itemprop="name">Freelance Graphic Designer</h3>
+                        <p itemprop="description">Designed and developed graphics for various clients including logos, posters, social media content, menu and invitation cards.</p>
+                    </div>
+                </div>
+                <div itemscope itemtype="https://schema.org/WorkExperience">
+                    <div class="experience-item">
+                        <h3 itemprop="name">GMS (Graphic Media Society), University of Sargodha</h3>
+                        <p itemprop="description">Utilized Adobe Creative Suite (Photoshop, Illustrator, InDesign) to create high-quality designs. Developed a series of posters and flyers for local community events, enhancing event visibility and attendance.</p>
+                    </div>
+                </div>
+                <div itemscope itemtype="https://schema.org/WorkExperience">
+                    <div class="experience-item">
+                        <h3 itemprop="name">Self-Directed Projects</h3>
+                        <p itemprop="description">Explored various design styles and techniques, producing a diverse collection of artwork displayed on personal social media accounts.</p>
+                    </div>
+                </div>
+                <button class="interactive-btn" onclick="toggleContent('portfolio-samples')">View Sample Work</button>
+                <div id="portfolio-samples" class="hidden-content">
+                    <p>Portfolio highlights include:</p>
+                    <ul>
+                        <li>Logo design for local businesses</li>
+                        <li>Event posters for university functions</li>
+                        <li>Social media content packages</li>
+                        <li>Custom invitation designs</li>
+                        <li>Digital illustrations for various projects</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section" id="languages">
+                <div class="section-title">
+                    <i class="fa-solid fa-language"></i>
+                    <h2>Languages</h2>
+                </div>
+                <div class="languages-container">
+                    <div class="language-item">
+                        <span class="language-name" itemprop="knowsLanguage">English</span>
+                        <div class="language-level">
+                            <div class="language-level-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="language-item">
+                        <span class="language-name" itemprop="knowsLanguage">Urdu</span>
+                        <div class="language-level">
+                            <div class="language-level-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section" id="certifications">
+                <div class="section-title">
+                    <i class="fa-solid fa-certificate"></i>
+                    <h2>Certifications</h2>
+                </div>
+                <div class="cert-item" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+                    <h3 itemprop="name">Graphics Design and Illustration Using Adobe Illustrator</h3>
+                    <p itemprop="description">Adobe Certified Professional</p>
+                </div>
+                <div class="cert-item" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+                    <h3 itemprop="name">Illustrator, Logos and Design</h3>
+                    <p itemprop="description">Career Development Center, UOS</p>
+                </div>
+                <button class="interactive-btn" onclick="toggleContent('cert-details')">See Certification Details</button>
+                <div id="cert-details" class="hidden-content">
+                    <p><strong>Adobe Certified Professional:</strong> This certification validates industry-standard skills in Adobe Illustrator, demonstrating proficiency in creating vector graphics, logos, and illustrations.</p>
+                    <p><strong>Career Development Center, UOS:</strong> This specialized course focused on advanced logo design techniques and branding principles using Adobe Illustrator.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="about-me">
+                <div class="section-title">
+                    <i class="fa-solid fa-user"></i>
+                    <h2>About Me</h2>
+                </div>
+                <p itemprop="description">Engaged in continuous learning by participating in online courses and design challenges to improve skills in graphic design.</p>
+                <button class="interactive-btn" onclick="toggleContent('about-more')">Read More</button>
+                <div id="about-more" class="hidden-content">
+                    <p>I am a passionate graphic designer with a keen eye for detail and a creative approach to problem-solving. My studies in Computer Science have provided me with a strong technical foundation, while my design work allows me to express my creativity.</p>
+                    <p>I enjoy staying updated with the latest design trends and techniques through online courses and active participation in design communities. My goal is to create visually appealing and effective designs that communicate messages clearly and leave lasting impressions.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Nadia Habib - Interactive CV</p>
+        </div>
+    </footer>
+    
+    <script>
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+        
+        // Initialize progress bars with animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
